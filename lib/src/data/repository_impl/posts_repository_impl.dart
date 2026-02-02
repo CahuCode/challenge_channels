@@ -1,3 +1,4 @@
+import 'package:challenge_channels/services/notification_service.dart';
 import 'package:challenge_channels/src/aplication/logs/logdev.dart';
 import 'package:challenge_channels/src/core/failures/exceptions.dart';
 import 'package:challenge_channels/src/core/failures/failure.dart';
@@ -21,17 +22,17 @@ class PostsRepositoryImpl extends PostsRepository {
   Stream<List<PostEntity>> watchPosts() => localDs.watchPosts().map((db) => db.map((e) => e.toPostEntity()).toList());
 
   @override
+  Stream<PostEntity?> watchPost({required int postId}) =>
+      localDs.watchPost(postId: postId).map((e) => e?.toPostEntity());
+
+  @override
   Future<Either<Failure, Unit>> syncPosts() async {
     final connect = await network.isConnected;
     if (!connect) return Left(mapExceptionToFailure(NetworkException()));
     try {
-      logDev.i("SYNC_POST  >>> CONNECT  1");
       final listPostsDtos = await remoteDs.getPosts();
-      logDev.i("SYNC_POST  >>> CONNECT  2");
       if (listPostsDtos.isEmpty) return Right(unit);
-      logDev.i("SYNC_POST  >>> CONNECT  3");
       final listPostDB = listPostsDtos.map((e) => e.toPostDB()).toList();
-      logDev.i("SYNC_POST  >>> CONNECT  4");
       logDev.i("POSTS DB SYNC  >>> ${listPostDB.length}");
       await localDs.saveUpdatePosts(listPostDB);
       return Right(unit);
@@ -61,17 +62,26 @@ class PostsRepositoryImpl extends PostsRepository {
     final connect = await network.isConnected;
     if (!connect) return Left(mapExceptionToFailure(NetworkException()));
     try {
-      logDev.i("COMMENTS  >>>> 1");
-
       final post = await localDs.getPostByPostId(postId: postId);
-      logDev.i("COMMENTS  >>>> 2  ${post?.title}");
       if (post == null) return Left(LocalFailure(msg: 'Post no encontrado'));
+      logDev.i("COMMENTSSSS  DB_INIT  >>>> ${post.comments.length}");
 
       final listCommentDtos = await remoteDs.getComments(idPost: postId);
-      logDev.i("COMMENTS  >>>> ${listCommentDtos.length}");
+      logDev.i("COMMENTSSSS  server  >>>> ${listCommentDtos.length}");
       if (listCommentDtos.isEmpty) return Right(unit);
       final listCommentDB = listCommentDtos.map((e) => e.toCommentDB()).toList();
-      localDs.saveUpdatePosts([post.copyWith(comments: listCommentDB)]);
+      logDev.i("COMMENTSSSS  DB  >>>> ${listCommentDtos.length}");
+      post.comments
+        ..clear()
+        ..addAll(listCommentDB)
+        ..applyToDb();
+      localDs.saveUpdatePosts([post]);
+
+      ///
+      final postreme = await localDs.getPostByPostId(postId: postId);
+
+      logDev.i("COMMENTSSSS  DB_remenber  >>>> ${postreme?.comments.length}");
+
       return Right(unit);
     } on TimeoutException {
       logDev.s("Tiempo de espera agotado.");
@@ -99,7 +109,19 @@ class PostsRepositoryImpl extends PostsRepository {
     try {
       final post = await localDs.getPostByPostId(postId: postId);
       if (post == null) return Left(LocalFailure(msg: 'Post no encontrado'));
-      localDs.saveUpdatePosts([post.copyWith(isFavorite: !post.isFavorite)]);
+      final notificationService = NotificationService();
+      if (!post.isFavorite) {
+        notificationService.show(title: 'Te ha gustado >> ${post.title}', body: '${post.body}', payload: 'postId=12');
+      }
+
+      //post.isFavorite = !post.isFavorite;
+      logDev.i("FAVORITE  DB_Old  >>>> ${post.isFavorite}");
+      post.isFavorite = !post.isFavorite;
+      localDs.saveUpdatePosts([], post: post);
+      final postNew = await localDs.getPostByPostId(postId: postId);
+
+      logDev.i("FAVORITE  DB_NEW  >>>> ${postNew?.isFavorite}");
+
       return Right(unit);
     } on LocalFailure {
       logDev.s("Error de consulta local");

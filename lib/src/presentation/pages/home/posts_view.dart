@@ -1,4 +1,5 @@
 import 'package:challenge_channels/src/aplication/routes/app_routes.dart';
+import 'package:challenge_channels/src/aplication/theme/colors_app.dart';
 import 'package:challenge_channels/src/presentation/state_manager/posts_notifier.dart';
 import 'package:challenge_channels/src/shareds/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class PostsView extends ConsumerWidget {
             final post = postsList[index];
             return CustomWidgets.customPost(
               post,
+              colorFav: post.isFavorite ? ColorsApp.redBtn : ColorsApp.greyIcon,
               callback: () async {
                  ref.read(syncCommentsProvider(post.id));
                 context.push(routeDetailpost, extra: post);

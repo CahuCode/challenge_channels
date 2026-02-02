@@ -28,13 +28,14 @@ import 'package:pigeon/pigeon.dart';
 
 // dart run pigeon --input pigeons/notification_api.dart
 
-class NotificationMessage {
+class NotificationData {
+  int? notificationId;
   String? title;
   String? body;
   String? payload;
 }
 
 @HostApi()
-abstract class LocalNotificationApi {
-  void show(NotificationMessage message);
+abstract class NotificationApi {
+  void showNotification(NotificationData data);
 }

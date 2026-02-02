@@ -18,4 +18,9 @@ class CommentDbModel {
     required this.email,
     required this.body,
   });
+
+  @override
+  String toString() {
+    return 'CommentDbModel{id: $id, postId: $postId, commentId: $commentId, name: $name, email: $email, body: $body}';
+  }
 }

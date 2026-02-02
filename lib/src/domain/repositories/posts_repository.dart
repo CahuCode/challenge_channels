@@ -6,6 +6,8 @@ import 'package:dartz/dartz.dart';
 abstract class PostsRepository {
   Stream<List<PostEntity>> watchPosts();
 
+  Stream<PostEntity?> watchPost({required int postId});
+
   Future<Either<Failure, Unit>> syncPosts();
 
   Future<Either<Failure, Unit>> syncComments({required int postId});

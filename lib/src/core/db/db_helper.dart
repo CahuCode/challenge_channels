@@ -2,6 +2,7 @@ import 'package:challenge_channels/objectbox.g.dart';
 import 'package:challenge_channels/src/data/db_models/comment_db_model.dart';
 import 'package:challenge_channels/src/data/db_models/post_db_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'objectbox_app.dart';
 
@@ -16,9 +17,16 @@ class DBHelper {
     return query.map((q) => q.find());
   }
 
-  static Stream<PostDbModel?> watchPost({required int postId}) {
+  /*  static Stream<PostDbModel?> watchPost({required int postId}) {
     final query = boxPosts.query(PostDbModel_.postId.equals(id(postId)));
     return query.watch(triggerImmediately: true).map((q) => q.findFirst());
+  }*/
+
+  static Stream<PostDbModel?> watchPost({required int postId}) {
+    return boxPosts
+        .query(PostDbModel_.postId.equals(postId))
+        .watch(triggerImmediately: true)
+        .map((query) => query.findFirst());
   }
 
   // guarda 1 o un listado de archivos en el box de boxArchives
@@ -48,6 +56,7 @@ class DBHelper {
       _savePostS(post: post);
       return;
     }
+
     _savePostS(
       post: postDB.copyWith(title: post.title, body: post.body),
     );
@@ -57,6 +66,10 @@ class DBHelper {
     for (final item in posts) {
       _saveUpdatePost(post: item);
     }
+  }
+
+  static void savePost({required PostDbModel post}) {
+    _savePostS(post: post);
   }
 
   // return todas las fincas guardadas

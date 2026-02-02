@@ -42,4 +42,9 @@ class PostDbModel {
     post.comments.addAll(comments ?? this.comments);
     return post;
   }
+
+  @override
+  String toString() {
+    return 'PostDbModel{id: $id, userId: $userId, postId: $postId, title: $title, body: $body, isFavorite: $isFavorite, comments: $comments}';
+  }
 }

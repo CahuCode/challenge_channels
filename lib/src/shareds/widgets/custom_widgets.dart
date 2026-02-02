@@ -135,12 +135,12 @@ class CustomWidgets {
     );
   }
 
-  static ListTile customPost(PostEntity post, {VoidCallback? callback, VoidCallback? callbackFavorite}) {
+  static ListTile customPost(PostEntity post ,{Color colorFav = ColorsApp.greyIcon, VoidCallback? callback, VoidCallback? callbackFavorite}) {
     return ListTile(
       title: Text(post.title),
       //subtitle: Text(post.body),
       trailing: IconButton(
-        color: post.isFavorite ? ColorsApp.redBtn : ColorsApp.greyInactive,
+        color: colorFav,
         icon: Icon(post.isFavorite ? Icons.favorite : Icons.favorite_border),
         onPressed: () {
           if (callbackFavorite != null) callbackFavorite();
