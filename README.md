@@ -3,14 +3,51 @@
 A new Flutter project.
 
 ## Getting Started
+ Estructura de carpetas en arquitectura Limpia. Version de flutter 3.38.5
 
-This project is a starting point for a Flutter application.
+lib/
+|__ pigeons
+|__ services
+├── src/
+├   |── aplications/
+|   |   |── logs/
+|   |   |── routes/
+|   |   |── theme/
+|   |── core/
+|   |   |── db/
+|   |   |── di/
+|   |   |── failures/
+|   |   |── network/
+|   |   |── utils/
+|   |── data/
+|   |   |── datasources/
+|   |   |── db_models/
+|   |   |── dtos/
+|   |   |── mappers/
+|   |   |── repository_impl/
+|   |── domain/
+|   |   |── entities/
+|   |   |── repositories/
+|   |   |── use_cases/
+|   |── presentation/
+|   |   |── pages/
+|   |   |── state_manager/
+|   |── shareds/
+|   |   |── widgets/
+|── main.dart
+│
+├── pigeons/
+      └── notification_api.dart
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Comando para ejecucion del proyecto.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Contruccion de la DB Local.
+  flutter pub run build_runner build
+
+- Levantamiento de pigeon
+  dart run pigeon --input pigeons/notification_api.dart
+
+Video demostrativo.
+
+https://drive.google.com/file/d/1AYVYiXwowsRgFU1c4eyFwYFhLTq3jP0F/view?usp=sharing
