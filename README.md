@@ -11,7 +11,7 @@ Proyecto flutter creado con arquitectura limpia, implementacion de pigeon para c
 **Limpieza de proyecto**
 flutter clean
 
-**Contruccion de la DB Local Objectbox**
+**Contruccion de la DB Local Objectbox.**
 flutter pub run build_runner build
 
 **Creacion de archivos pigeon**
