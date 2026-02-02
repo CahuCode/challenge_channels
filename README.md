@@ -1,53 +1,22 @@
-# challenge_channels
+# Challenge_Pigeon!
 
-A new Flutter project.
-
-## Getting Started
- Estructura de carpetas en arquitectura Limpia. Version de flutter 3.38.5
-
-lib/
-|__ pigeons
-|__ services
-├── src/
-├   |── aplications/
-|   |   |── logs/
-|   |   |── routes/
-|   |   |── theme/
-|   |── core/
-|   |   |── db/
-|   |   |── di/
-|   |   |── failures/
-|   |   |── network/
-|   |   |── utils/
-|   |── data/
-|   |   |── datasources/
-|   |   |── db_models/
-|   |   |── dtos/
-|   |   |── mappers/
-|   |   |── repository_impl/
-|   |── domain/
-|   |   |── entities/
-|   |   |── repositories/
-|   |   |── use_cases/
-|   |── presentation/
-|   |   |── pages/
-|   |   |── state_manager/
-|   |── shareds/
-|   |   |── widgets/
-|── main.dart
-│
-├── pigeons/
-      └── notification_api.dart
+Proyecto flutter creado con arquitectura limpia, implementacion de pigeon para comunicarnos de manera nativa. Aplicativo trabajado en la modalidad offline-first.
 
 
-Comando para ejecucion del proyecto.
+# Estructura de carpetas
+![Estructura](https://drive.google.com/file/d/1WC26Cd6HjU2LosSmRpgMwQck3ohCeSBw/view?usp=sharing)
 
-- Contruccion de la DB Local.
-  flutter pub run build_runner build
+## Comandos para levantar el proyecto.
 
-- Levantamiento de pigeon
-  dart run pigeon --input pigeons/notification_api.dart
+**Limpieza de proyecto**
+flutter clean
 
-Video demostrativo.
+**Contruccion de la DB Local Objectbox**
+flutter pub run build_runner build
 
-https://drive.google.com/file/d/1AYVYiXwowsRgFU1c4eyFwYFhLTq3jP0F/view?usp=sharing
+**Creacion de archivos pigeon**
+Las direcciones donde se van a crear estan especipicadas en el archivo **notification_api.dart**
+dart run pigeon --input pigeons/notification_api.dart
+
+## Video de funcionalidades
+[Funcionalidades del aplicativo](https://drive.google.com/file/d/1AYVYiXwowsRgFU1c4eyFwYFhLTq3jP0F/view?usp=sharing)
