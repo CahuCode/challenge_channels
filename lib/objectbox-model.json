@@ -1,0 +1,113 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2931737965463348577",
+      "lastPropertyId": "10:6880003786568148111",
+      "name": "CommentDbModel",
+      "properties": [
+        {
+          "id": "1:1967802958144400861",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "4:4300935405449512087",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:6738964908160093831",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "6:552684578350037588",
+          "name": "body",
+          "type": 9
+        },
+        {
+          "id": "9:5247634846607059819",
+          "name": "postId",
+          "type": 6
+        },
+        {
+          "id": "10:6880003786568148111",
+          "name": "commentId",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3556191122092791761",
+      "lastPropertyId": "10:5414023704649942732",
+      "name": "PostDbModel",
+      "properties": [
+        {
+          "id": "1:8291367764273655593",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "4:338345024824131249",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:7864957524971622603",
+          "name": "body",
+          "type": 9
+        },
+        {
+          "id": "8:7899252918888757548",
+          "name": "isFavorite",
+          "type": 1
+        },
+        {
+          "id": "9:4258002409561423645",
+          "name": "userId",
+          "type": 6
+        },
+        {
+          "id": "10:5414023704649942732",
+          "name": "postId",
+          "type": 6
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:4760798503526193101",
+          "name": "comments",
+          "targetId": "1:2931737965463348577"
+        }
+      ]
+    }
+  ],
+  "lastEntityId": "2:3556191122092791761",
+  "lastIndexId": "1:6888442964382203585",
+  "lastRelationId": "1:4760798503526193101",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    6888442964382203585
+  ],
+  "retiredPropertyUids": [
+    4661444735342521992,
+    6140632778781903262,
+    5692164489295845241,
+    2204212711337623366,
+    8994773502960936797,
+    943108135584355363,
+    2685243696958959412,
+    5672236274598809328
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
