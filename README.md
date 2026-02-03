@@ -105,9 +105,7 @@ El archivo **notification_api.dart** contiene las direcciones y los nombres de l
 
 # Video de funcionalidades
 
-[video_app.mp4](assets/images/video_app.mp4)
-
-https://github.com/CahuCode/challenge_channels/tree/main/assets/images/video_app.mp4
+[Funcionalidades del aplicativo](https://drive.google.com/file/d/1QcKcwu-Z8wCNeJnmgBPECsGhnwFtmnki/view?usp=sharing)
 
 
       
