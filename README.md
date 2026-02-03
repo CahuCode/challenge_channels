@@ -104,7 +104,7 @@ El archivo **notification_api.dart** contiene las direcciones y los nombres de l
     dart run pigeon --input pigeons/notification_api.dart
 
 ## Video de funcionalidades
-[Funcionalidades del aplicativo](https://drive.google.com/file/d/1AYVYiXwowsRgFU1c4eyFwYFhLTq3jP0F/view?usp=sharing)
+[Funcionalidades del aplicativo](https://github.com/CahuCode/challenge_channels/tree/main/assets/images/video_app.mp4)
 
 
       
