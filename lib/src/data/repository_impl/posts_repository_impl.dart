@@ -123,10 +123,6 @@ class PostsRepositoryImpl extends PostsRepository {
       logDev.i("FAVORITE  DB_Old  >>>> ${post.isFavorite}");
       post.isFavorite = !post.isFavorite;
       localDs.saveUpdatePosts([], post: post);
-      final postNew = await localDs.getPostByPostId(postId: postId);
-
-      logDev.i("FAVORITE  DB_NEW  >>>> ${postNew?.isFavorite}");
-
       return Right(unit);
     } on LocalFailure {
       logDev.s("Error de consulta local");

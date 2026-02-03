@@ -88,6 +88,8 @@ Proyecto flutter creado mediante arquitectura limpia para el consumo de endpoint
 
 ## Comandos para levantar el proyecto.
 
+El proyecto esta construido con la version de flutter 3.38.5
+
 **Limpieza de proyecto**
 flutter clean
 

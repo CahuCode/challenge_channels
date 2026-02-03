@@ -69,7 +69,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(2, 3556191122092791761),
     name: 'PostDbModel',
-    lastPropertyId: const obx_int.IdUid(10, 5414023704649942732),
+    lastPropertyId: const obx_int.IdUid(11, 8096501600258942503),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -178,6 +178,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       943108135584355363,
       2685243696958959412,
       5672236274598809328,
+      8096501600258942503,
     ],
     retiredRelationUids: const [],
     modelVersion: 5,
@@ -263,7 +264,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       objectToFB: (PostDbModel object, fb.Builder fbb) {
         final titleOffset = fbb.writeString(object.title);
         final bodyOffset = fbb.writeString(object.body);
-        fbb.startTable(11);
+        fbb.startTable(12);
         fbb.addInt64(0, object.id);
         fbb.addOffset(3, titleOffset);
         fbb.addOffset(4, bodyOffset);
