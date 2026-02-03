@@ -19,11 +19,16 @@ class PostsRepositoryImpl extends PostsRepository {
   PostsRepositoryImpl({required this.remoteDs, required this.localDs, required this.network});
 
   @override
-  Stream<List<PostEntity>> watchPosts() => localDs.watchPosts().map((db) => db.map((e) => e.toPostEntity()).toList());
+  Stream<List<PostEntity>> watchPosts() =>
+      localDs.watchAllPosts().map((db) => db.map((e) => e.toPostEntity()).toList());
 
   @override
   Stream<PostEntity?> watchPost({required int postId}) =>
       localDs.watchPost(postId: postId).map((e) => e?.toPostEntity());
+
+  @override
+  Stream<List<PostEntity>> watchSearchPosts({required String textSearch}) =>
+      localDs.watchPostsSearch(txtSearch: textSearch).map((db) => db.map((e) => e.toPostEntity()).toList());
 
   @override
   Future<Either<Failure, Unit>> syncPosts() async {

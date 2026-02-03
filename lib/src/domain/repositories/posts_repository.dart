@@ -13,4 +13,6 @@ abstract class PostsRepository {
   Future<Either<Failure, Unit>> syncComments({required int postId});
 
   Future<Either<Failure, Unit>> toggleFavoritePost({required int postId});
+
+  Stream<List<PostEntity>> watchSearchPosts({required String textSearch});
 }

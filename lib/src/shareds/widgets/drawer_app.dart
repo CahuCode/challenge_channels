@@ -17,9 +17,6 @@ class DrawerAppState extends ConsumerState<DrawerApp> {
   @override
   void initState() {
     super.initState();
-    /*WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(deviceInfoProvider.notifier).getInfodevice();
-    });*/
   }
 
   @override

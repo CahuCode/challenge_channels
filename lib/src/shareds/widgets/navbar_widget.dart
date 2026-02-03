@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../presentation/state_manager/general_notifier.dart';
+import '../../presentation/state_manager/general_provider.dart';
 
 class NavbarWidget extends ConsumerWidget {
-  //final List<BottomNavigationBarItem> navItems;
-
-  //const NavbarWidget({required this.navItems, super.key});
   const NavbarWidget({super.key});
 
   @override
@@ -21,7 +18,6 @@ class NavbarWidget extends ConsumerWidget {
     ];
 
     final navWatch = ref.watch(indexNavProvider);
-    //final login = ref.read(loginProvider).login;
     final String location = GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
     return BottomNavigationBar(
       elevation: 1,

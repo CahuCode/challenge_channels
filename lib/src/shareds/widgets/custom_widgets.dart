@@ -6,22 +6,6 @@ import 'package:flutter/material.dart';
 import 'custom_text.dart';
 
 class CustomWidgets {
-  /*  static void showToast(String msg, {int position = 0}) {
-    EasyLoading.showToast(
-      msg,
-      toastPosition: (position == 0) ? EasyLoadingToastPosition.bottom : EasyLoadingToastPosition.top,
-      maskType: EasyLoadingMaskType.none,
-    );
-  }
-
-  static void showLoading(String msg) {
-    EasyLoading.show(status: msg, maskType: EasyLoadingMaskType.custom);
-  }
-
-  static void hideLoading() {
-    EasyLoading.dismiss();
-  }*/
-
   static void showSnackBar(
     BuildContext context,
     String message, {
@@ -137,7 +121,7 @@ class CustomWidgets {
 
   static ListTile customPost(PostEntity post ,{Color colorFav = ColorsApp.greyIcon, VoidCallback? callback, VoidCallback? callbackFavorite}) {
     return ListTile(
-      title: Text(post.title),
+      title: Text(post.title, style: TextStyle(fontWeight: FontWeight.bold),),
       //subtitle: Text(post.body),
       trailing: IconButton(
         color: colorFav,

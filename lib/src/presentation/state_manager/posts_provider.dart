@@ -10,18 +10,18 @@ import 'package:challenge_channels/src/domain/use_cases/toggle_post_usecase.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart' show StateNotifierProvider, StateNotifier;
 
+//POSTS
 final postsStreamProvider = StreamProvider<List<PostEntity>>((ref) {
   return getIt<PostsRepository>().watchPosts();
 });
 
-// posts
-final syncPostsProvider = FutureProvider((ref) async {
+final syncPostsApiProvider = FutureProvider((ref) async {
   final result = await getIt<SyncPostsUsecase>()();
   result.fold((failure) => throw failure.msg, (_) => null);
 });
 
 // comments
-final postStreamProvider = StreamProvider.family<PostEntity?, int>((ref, postId) {
+final watchPostProvider = StreamProvider.family<PostEntity?, int>((ref, postId) {
   return getIt<PostsRepository>().watchPost(postId: postId);
 });
 
@@ -33,11 +33,6 @@ final syncCommentsProvider = FutureProvider.family<void, int>((ref, postId) asyn
 
 // favorites
 final _favoriteUsecase = Provider<TogglePostUsecase>((ref) => getIt<TogglePostUsecase>());
-
-/*final toggleFavoriteProvider = FutureProvider.family<void, int>((ref, postId) async {
-  final result = await ref.read(_favoriteUsecase).toggleFavorite(postId: postId);
-  result.fold((failure) => throw failure.msg, (_) => null);
-});*/
 
 final toggleFavoriteProvider = StateNotifierProvider<_ToggelOperations, String>(
   (ref) => _ToggelOperations(useCase: ref.read(_favoriteUsecase)),

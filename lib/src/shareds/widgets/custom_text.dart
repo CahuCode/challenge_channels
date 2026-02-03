@@ -37,32 +37,6 @@ class CustomText {
     );
   }
 
-  //titulo
-  Text titulo(
-    String text, {
-    Color? textColor,
-    bool isBold = true,
-    double textSpacing = 0,
-    double porcent = 2,
-    TextAlign aligText = TextAlign.start,
-    int lines = 1,
-  }) {
-    Responsive responsive = Responsive(context);
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: responsive.dp(porcent),
-        fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-        color: textColor ?? Theme.of(context).colorScheme.secondary,
-        letterSpacing: textSpacing,
-        overflow: TextOverflow.ellipsis,
-      ),
-      textAlign: aligText,
-      maxLines: lines,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
   AutoSizeText autoSizeText(
     String txt, {
     Color? textColor,
@@ -100,49 +74,6 @@ class CustomText {
       ),
       textAlign: TextAlign.center,
       overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  RichText richText(
-    String title,
-    String content, {
-    Color? textTitleColor,
-    Color? textContentColor,
-    bool isBoldTitle = false,
-    bool isBoldContent = false,
-    double textSpacing = 0,
-    double sizeTitle = 2,
-    double sizeContent = 1.6,
-    TextAlign aligText = TextAlign.start,
-  }) {
-    Responsive responsive = Responsive(context);
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: title,
-            style: TextStyle(
-              fontSize: responsive.dp(sizeTitle),
-              fontWeight: isBoldTitle ? FontWeight.bold : FontWeight.normal,
-              color: textTitleColor ?? ColorsApp.textTitle,
-              backgroundColor: Colors.transparent,
-              overflow: TextOverflow.ellipsis,
-              letterSpacing: textSpacing,
-            ),
-          ),
-          TextSpan(
-            text: '  $content  ',
-            style: TextStyle(
-              fontSize: responsive.dp(sizeContent),
-              fontWeight: isBoldContent ? FontWeight.bold : FontWeight.normal,
-              color: textContentColor ?? ColorsApp.textSubTitle,
-              backgroundColor: Colors.transparent,
-              overflow: TextOverflow.ellipsis,
-              letterSpacing: textSpacing,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:challenge_channels/objectbox.g.dart';
 import 'package:challenge_channels/src/data/db_models/comment_db_model.dart';
 import 'package:challenge_channels/src/data/db_models/post_db_model.dart';
 import 'package:dartz/dartz.dart';
-import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
+import 'package:objectbox/objectbox.dart';
 
 import 'objectbox_app.dart';
 
@@ -12,16 +12,12 @@ class DBHelper {
   ///  -----------    POSTs  -------------
   static int getPostsCount() => boxPosts.count();
 
-  static Stream<List<PostDbModel>> watchPosts() {
+  static Stream<List<PostDbModel>> watchAllPosts() {
     final query = boxPosts.query().watch(triggerImmediately: true);
     return query.map((q) => q.find());
   }
 
-  /*  static Stream<PostDbModel?> watchPost({required int postId}) {
-    final query = boxPosts.query(PostDbModel_.postId.equals(id(postId)));
-    return query.watch(triggerImmediately: true).map((q) => q.findFirst());
-  }*/
-
+  // search post by postId
   static Stream<PostDbModel?> watchPost({required int postId}) {
     return boxPosts
         .query(PostDbModel_.postId.equals(postId))
@@ -29,13 +25,24 @@ class DBHelper {
         .map((query) => query.findFirst());
   }
 
-  // guarda 1 o un listado de archivos en el box de boxArchives
+  static Stream<List<PostDbModel>> watchSearchPosts({required String textSearch}) {
+    if (textSearch.trim().isEmpty) return watchAllPosts();
+
+    return boxPosts
+        .query(
+          PostDbModel_.title
+              .contains(textSearch, caseSensitive: false)
+              .or(PostDbModel_.body.contains(textSearch, caseSensitive: false)),
+        )
+        .watch(triggerImmediately: true)
+        .map((q) => q.find());
+  }
+
+
   static void _savePostS({PostDbModel? post, List<PostDbModel>? posts}) {
     if (post != null) boxPosts.put(post);
     if (posts != null) boxPosts.putMany(posts);
   }
-
-  static PostDbModel? _getPostByIdDB({required int idPostDB}) => boxPosts.get(idPostDB);
 
   static PostDbModel? getPostByPostId({required int postId}) {
     final query = boxPosts.query(PostDbModel_.postId.equals(id(postId))).build();
